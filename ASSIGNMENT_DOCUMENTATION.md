@@ -129,8 +129,13 @@ Ran program 2 times and checked consistency
 - What incorrect behavior could occur?
 
 **Your Answer**:
+Shared counter variables like contextSwitchCount, completedProcessCount, and totalWaitingTime exhibit the first race condition. Multiple threads alter these variables within procedures like addWaitingTime() and incrementContextSwitch(). Two threads may read the same value and change it wrongly in the absence of synchronization, which could result in lost updates and inaccurate outcomes.
 
-[Your answer here - 4-6 sentences with code examples]
+The shared executionLog (ArrayList) is where the second race situation takes place. Multiple threads calling executionLog.add() simultaneously may distort the internal structure or result in a ConcurrentModificationException since ArrayList is not thread-safe.
+
+Because operations like increment (++) and list update are not atomic, concurrent access is troublesome. Inconsistent data, such as inaccurate counts or missing log entries, may arise from this. ReentrantLock synchronization makes sure that only one thread can change these shared resources at once.
+
+
 
 ---
 
@@ -138,8 +143,13 @@ Ran program 2 times and checked consistency
 **Q**: Explain the difference between ReentrantLock and Semaphore. Where did you use each in your code and why?
 
 **Your Answer**:
+ReentrantLock is used to provide mutual exclusion, meaning only one thread can enter a critical section at a time. It gives more control than synchronized blocks and allows explicit lock and unlock operations. In my code, I used a single ReentrantLock (SharedResources.lock) to protect shared counters and the execution log, ensuring thread-safe updates.
 
-[Your answer here - explain your implementation choices]
+A Semaphore, on the other hand, controls access based on permits. It allows a fixed number of threads to access a resource simultaneously. In my implementation, I used a binary semaphore (cpuSemaphore with 1 permit) to simulate a single CPU. This ensures that only one process (thread) can execute at a time.
+
+The key difference is that ReentrantLock is used for protecting critical sections, while Semaphore is used for controlling access to limited resources. In this code, the lock protects shared data, and the semaphore controls CPU execution
+
+
 
 ---
 
@@ -147,8 +157,15 @@ Ran program 2 times and checked consistency
 **Q**: What is deadlock? Explain TWO prevention techniques and what you did to prevent deadlocks in your code.
 
 **Your Answer**:
+Deadlock is a situation where two or more threads are blocked forever because each one is waiting for a resource held by another thread. This usually happens when locks are not released properly or when there is circular waiting.
 
-[Your answer here - reference try-finally blocks, lock ordering, etc.]
+One prevention technique is using try-finally blocks to ensure that locks are always released, even if an exception occurs. In my code, every lock.lock() is followed by unlock() inside a finally block, which guarantees that the lock will not remain held.
+
+Another technique is avoiding resource holding for long periods and ensuring proper ordering. In this implementation, I used a simple design with a single lock, which reduces the risk of circular waiting.
+
+Additionally, the semaphore (cpuSemaphore) is always released in a finally block in both run() and runToCompletion() methods. This prevents threads from getting stuck and ensures smooth execution without deadlocks.
+
+
 
 ---
 
@@ -160,8 +177,16 @@ Ran program 2 times and checked consistency
 - Given that the three counters are independent, which approach provides better concurrency and why?
 
 **Your Answer**:
+In my implementation, I used a single ReentrantLock (coarse-grained locking) to protect all shared counters and the execution log. This means that whenever any thread needs to update a shared resource, it must acquire the same lock.
 
-[Your answer here - explain coarse-grained vs fine-grained locking, independence of counters, concurrency implications. Show understanding of when to use each approach. 5-8 sentences expected.]
+The advantage of this approach is simplicity and reduced risk of errors such as deadlocks or inconsistent locking. It ensures correctness because only one thread can access shared resources at a time.
+
+However, the trade-off is reduced concurrency. Even though the counters (contextSwitchCount, completedProcessCount, totalWaitingTime) are independent, threads cannot update them simultaneously because they share the same lock.
+
+A fine-grained approach (separate locks for each counter) would allow better concurrency since multiple threads could update different variables at the same time. Given that the counters are independent, fine-grained locking would provide better performance.
+
+Despite that, I chose coarse-grained locking for simplicity and reliability, especially in this assignment where correctness is more important than performance
+
 
 ---
 
