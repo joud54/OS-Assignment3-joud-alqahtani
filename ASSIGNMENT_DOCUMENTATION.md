@@ -194,52 +194,78 @@ Despite that, I chose coarse-grained locking for simplicity and reliability, esp
 
 ### Critical Section #1: Counter Variables
 
-**Which variables**: 
+**Which variables**:
+ contextSwitchCount, completedProcessCount, totalWaitingTime
 
 **Why they need protection**: 
+These variables are shared among multiple threads and are updated concurrently
 
 **Synchronization mechanism used**: 
+ReentrantLock
 
 **Code snippet**:
 ```java
-// Paste your implementation here
+lock.lock();
+try {
+    contextSwitchCount++;
+} finally {
+    lock.unlock();
+}
 ```
 
 **Justification**: 
+
+Using ReentrantLock ensures mutual exclusion, meaning only one thread can update the shared counters at a time. This prevents race conditions and guarantees correct final values for all statistics.
 
 ---
 
 ### Critical Section #2: Execution Log
 
 **What resource**: 
+executionLog (ArrayList)
 
 **Why it needs protection**: 
+ArrayList is not thread-safe.
 
 **Synchronization mechanism used**: 
+ReentrantLock
 
 **Code snippet**:
 ```java
-// Paste your implementation here
+lock.lock();
+try {
+    executionLog.add(message);
+} finally {
+    lock.unlock();
+}
 ```
 
 **Justification**: 
+prevents data corruption and exceptions
 
 ---
 
 ### Critical Section #3: CPU Semaphore
 
 **Purpose of semaphore**: 
+control access to the CPU
 
-**Number of permits and why**: 
+**Number of permits and why**:
+simulate a single CPU 1 
 
 **Where implemented**: 
+inside run() mithod
 
 **Code snippet**:
 ```java
-// Paste your implementation here
+   SharedResources.cpuSemaphore.acquire();
+
+   SharedResources.cpuSemaphore.release();
+
 ```
 
 **Effect on program behavior**: 
+ensures that only one process executes at a time
 
 ---
 
