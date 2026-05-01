@@ -1,7 +1,7 @@
 # Assignment 3 - Complete Documentation
 
-**Student Name**: [Your Full Name]  
-**Student ID**: [Your ID]  
+**Student Name**: [joud saad alqahtani]  
+**Student ID**: [445052069]  
 **Date Submitted**: [Submission Date]
 
 ---
@@ -31,68 +31,92 @@
 
 Document your development process with **minimum 3 entries** showing progression:
 
-### Entry 1 - [Date, Time]
+### Entry 1 - [May 1, 2026, 3:00 PM]
 **What I implemented**: 
+began the assignment by comprehending the given code and determining any potential race situations and shared resources.
 
 **Challenges encountered**: 
+Understanding where race conditions occur in the multithreaded scheduler.
 
-**How I solved it**: 
+**How I solved it**:
+Carefully reviewed the code and traced thread execution. 
 
-**Testing approach**: 
+**Testing approach**:
+Ran the program multiple times to observe inconsistent results. 
 
-**Time spent**: 
+**Time spent**:
+1.5 hours 
 
 ---
 
-### Entry 2 - [Date, Time]
+### Entry 2 - [May 1, 2026, 5:30 PM]
 **What I implemented**: 
+Added ReentrantLock to protect counter variables (contextSwitchCount, completedProcessCount, totalWaitingTime).
 
 **Challenges encountered**: 
+Ensuring locks are always released properly
 
 **How I solved it**: 
+Used try-finally blocks to guarantee unlocking
 
 **Testing approach**: 
+Tested by running the program multiple times and checking counter consistency
 
 **Time spent**: 
+2.5 hours
+---
+
+### Entry 3 - [May 1, 2026, 10:00 PM]
+**What I implemented**: 
+Added synchronization to execution log using ReentrantLock.
+
+**Challenges encountered**: 
+Avoiding ConcurrentModificationException.
+
+**How I solved it**: 
+Wrapped all log operations inside lock/unlock blocks
+
+**Testing approach**: 
+Observed that no exceptions occur during execution.
+
+**Time spent**: 
+1 hour
 
 ---
 
-### Entry 3 - [Date, Time]
-**What I implemented**: 
+### Entry 4 - [May 1, 2026, 11:00 PM]
+**What I implemented**:
+Implemented Semaphore to control CPU access 
 
 **Challenges encountered**: 
+Understanding how permits affect thread execution
 
 **How I solved it**: 
+Used a binary semaphore (1 permit) to ensure only one thread accesses CPU.
 
-**Testing approach**: 
+**Testing approach**:
+Verified sequential execution behavior 
 
 **Time spent**: 
+1 hour
 
 ---
 
-### Entry 4 - [Date, Time]
+### Entry 5 - [May 2, 2026, 12:00 AM]
 **What I implemented**: 
+Completed documentation and final testing.
 
 **Challenges encountered**: 
+Ensuring all parts are complete and clear.
 
 **How I solved it**: 
+Reviewed assignment requirements and verified all sections
 
 **Testing approach**: 
+Ran program 2 times and checked consistency
 
 **Time spent**: 
-
----
-
-### Entry 5 - [Date, Time]
-**What I implemented**: 
-
-**Challenges encountered**: 
-
-**How I solved it**: 
-
-**Testing approach**: 
-
-**Time spent**: 
+0.5 hour
 
 ---
 
