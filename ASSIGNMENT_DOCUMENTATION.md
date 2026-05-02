@@ -2,7 +2,7 @@
 
 **Student Name**: [joud saad alqahtani]  
 **Student ID**: [445052069]  
-**Date Submitted**: [Submission Date]
+**Date Submitted**: [May 2, 2026]
 
 ---
 
@@ -14,9 +14,9 @@
 > Set sharing to "Anyone with the link can view".
 > Test the link in incognito/private mode before submitting.
 
-**Video Link**: [Paste your personal Gmail Google Drive link here]
+**Video Link**: https://drive.google.com/file/d/1z6Ygo0AoG4OBlEhdp_lmq8gPtIKTOHC7/view?usp=sharing
 
-**Video filename**: `[YourStudentID]_Assignment3_Synchronization.mp4`
+**Video filename**: `445052069_Assignment3_Synchronization.mp4`
 
 **Verification**:
 - [ ] Link is accessible (tested in incognito mode)
@@ -406,30 +406,35 @@ Synchronization in programming makes ensuring that threads don't interfere with 
 
 ## Part 6: GitHub Repository Information
 
-**Repository URL**: 
+**Repository URL**: https://github.com/joud54/OS-Assignment3-joud-alqahtani.git
 
-**Number of commits**: 
+**Number of commits**: 12
 
 **Commit messages**: 
-1. 
-2. 
-3. 
-4. 
+1. change my student id
+2. adding Reentrantlock
+3. adding semaphore and import its package for synchronization
+4. protect shared counters using Reentrantlock
+5. protecting
+6. use semaphore to control cpu access in process execution
+7. apply semaphore in runToCompletion method
 
 ---
 
 ## Summary
 
-**Total time spent on assignment**: 
+**Total time spent on assignment**: 10hours
 
 **Key takeaways**: 
-1. 
-2. 
-3. 
+1. Synchronization is essential to prevent race conditions in multithreaded programs.
+2. Locks and semaphores serve different purposes but work together to ensure correctness.
+3. Proper testing is necessary to verify thread-safe behavior.
 
 **Most challenging aspect**: 
+Recognizing and detecting racial characteristics in shared resources and making sure that all important areas are appropriately safeguarded
 
 **What I'm most proud of**: 
+Putting synchronization methods in place successfully and making sure the software operates correctly and consistently throughout several runs
 
 ---
 
